@@ -12,19 +12,25 @@ async function transcribeAudio(audioFilePath) {
         const audioData = fs.readFileSync(audioFilePath);
 
         // Get the model
-        const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
         // Prepare the audio data
         const audioBytes = Buffer.from(audioData).toString('base64');
-        
+        const prompt = `
+        Please transcribe this interview. in the format of timecode: speaker => content. 
+        Only provide the transcription, no other text.
+        Use speaker A, speaker B, etc. to identify speakers.
+        `
+
         // Create parts array with audio data
         const parts = [
             {
                 inlineData: {
-                    mimeType: "audio/mp3", // Adjust based on your audio file type
+                    mimeType: "audio/wav", // Adjust based on your audio file type
                     data: audioBytes
                 }
-            }
+            },
+            prompt
         ];
 
         // Generate content
