@@ -4,6 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node transcribe.js",
+    "transcribe:file": "node transcribe.js",
+    "transcribe:folder": "node transcribe.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
